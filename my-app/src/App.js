@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+// cleanup function
+// second argument
+
+const UseEffectCleanup = () => {
+  const [size, setSize] = useState(window.innerWidth);
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    console.log('useEffect');
+    window.addEventListener('resize', checkSize);
+    //return () => {
+     // console.log('cleanup');
+     // window.removeEventListener('resize', checkSize);
+    //};
+  }, []);
+  console.log('render');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>window</h1>
+      <h2>{size} PX</h2>
+    </>
   );
-}
+};
 
-export default App;
+export default UseEffectCleanup;
